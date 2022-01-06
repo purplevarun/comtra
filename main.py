@@ -43,11 +43,11 @@ while gameRunning:
 
     # load sprite
     player.draw()
-    player2.draw()
+    # player2.draw()
 
     # move sprite
     player.move(moving_left, moving_right, moving_up, moving_down)
-    player2.move(moving_left, moving_right, moving_up, moving_down)
+    # player2.move(moving_left, moving_right, moving_up, moving_down)
 
     # actions
     for event in pygame.event.get():

@@ -8,7 +8,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, playerType, x, y, scale, defaultSize=50, speed=5):
         pygame.sprite.Sprite.__init__(self)
         img = pygame.image.load(
-            "./src/images/sprites/{}/0.png".format(playerType)
+            "./src/images/sprites/{}/idle.png".format(playerType)
         )
         scaledWidth = defaultSize*scale
         scaledHeight = scaledWidth * (img.get_height()/img.get_width())
@@ -23,18 +23,19 @@ class Player(pygame.sprite.Sprite):
         self.img = img
         self.rect = rect
         self.speed = speed
+        self.flip = False
 
     def move(self, left, right, up, down):
-        
+
         dx = 0
         dy = 0
 
         if left:
             dx = -self.speed
-
+            self.flip = True
         if right:
             dx = self.speed
-
+            self.flip = False
         if up:
             dy = self.speed
 
@@ -45,4 +46,5 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += dy
 
     def draw(self):
-        screen.blit(self.img, self.rect)
+        afterRotationImg = pygame.transform.flip(self.img, self.flip, False)
+        screen.blit(afterRotationImg, self.rect)
