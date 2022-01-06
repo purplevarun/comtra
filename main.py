@@ -41,6 +41,9 @@ while gameRunning:
     # fps
     clock.tick(FPS)
 
+    #
+    player.update_animation()
+
     # load sprite
     player.draw()
     # player2.draw()
