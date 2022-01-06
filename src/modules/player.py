@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = speed
 
     def move(self, left, right, up, down):
-
+        
         dx = 0
         dy = 0
 

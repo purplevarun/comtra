@@ -19,12 +19,6 @@ def draw(*x):
 
 # initialization
 
-# pygame.init()
-# screenWidth = 800
-# screenHeight = int(0.8 * screenWidth)
-# screen = pygame.display.set_mode((screenWidth, screenHeight))
-# pygame.display.set_caption("Comtra")
-
 moving_left = False
 moving_right = False
 moving_up = False
@@ -49,9 +43,11 @@ while gameRunning:
 
     # load sprite
     player.draw()
+    player2.draw()
 
     # move sprite
     player.move(moving_left, moving_right, moving_up, moving_down)
+    player2.move(moving_left, moving_right, moving_up, moving_down)
 
     # actions
     for event in pygame.event.get():
@@ -63,6 +59,10 @@ while gameRunning:
         if event.type == pygame.KEYDOWN:
             key = event.key
             status = True
+
+            # exit game
+            if key == pygame.K_ESCAPE:
+                gameRunning = False
             # move left
             if key == pygame.K_a or key == pygame.K_LEFT:
                 moving_left = status
