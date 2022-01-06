@@ -2,7 +2,7 @@ import pygame
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, scale, defaultSize=50):
+    def __init__(self, x, y, scale, defaultSize=50, speed=5):
         pygame.sprite.Sprite.__init__(self)
         img = pygame.image.load("./src//freedinosprite/png/Idle (1).png")
         scaledWidth = defaultSize*scale
@@ -17,3 +17,24 @@ class Player(pygame.sprite.Sprite):
 
         self.img = img
         self.rect = rect
+        self.speed = speed
+
+    def move(self, left, right, up, down):
+
+        dx = 0
+        dy = 0
+
+        if left:
+            dx = -self.speed
+
+        if right:
+            dx = self.speed
+
+        if up:
+            dy = self.speed
+
+        if down:
+            dy = -self.speed
+
+        self.rect.x += dx
+        self.rect.y += dy
