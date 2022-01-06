@@ -2,9 +2,14 @@
 import pygame
 
 # import local modules
-from src.classes import *
-
+from src.modules.player import *
+from src.modules.mainScreen import *
 # user defined functions
+
+
+def draw_bg():
+    BG_COLOR = (144, 201, 100)
+    screen.fill(BG_COLOR)
 
 
 def draw(*x):
@@ -14,11 +19,11 @@ def draw(*x):
 
 # initialization
 
-pygame.init()
-screenWidth = 800
-screenHeight = int(0.8 * screenWidth)
-screen = pygame.display.set_mode((screenWidth, screenHeight))
-pygame.display.set_caption("Comtra")
+# pygame.init()
+# screenWidth = 800
+# screenHeight = int(0.8 * screenWidth)
+# screen = pygame.display.set_mode((screenWidth, screenHeight))
+# pygame.display.set_caption("Comtra")
 
 moving_left = False
 moving_right = False
@@ -28,19 +33,22 @@ moving_down = False
 clock = pygame.time.Clock()
 FPS = 60
 
-player = Player(200, 200, 5)
-player2 = Player(400, 400, 4)
+player = Player("player", 200, 200, 5)
+player2 = Player("player", 400, 400, 4)
 
 # game loop
 gameRunning = True
 while gameRunning:
     # inf game loop
 
+    # background reset
+    draw_bg()
+
     # fps
     clock.tick(FPS)
 
     # load sprite
-    draw(player)
+    player.draw()
 
     # move sprite
     player.move(moving_left, moving_right, moving_up, moving_down)

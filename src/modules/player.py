@@ -1,10 +1,15 @@
+# modules
 import pygame
+
+from src.modules.mainScreen import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, scale, defaultSize=50, speed=5):
+    def __init__(self, playerType, x, y, scale, defaultSize=50, speed=5):
         pygame.sprite.Sprite.__init__(self)
-        img = pygame.image.load("./src//freedinosprite/png/Idle (1).png")
+        img = pygame.image.load(
+            "./src/images/sprites/{}/0.png".format(playerType)
+        )
         scaledWidth = defaultSize*scale
         scaledHeight = scaledWidth * (img.get_height()/img.get_width())
         scaledWidth = int(scaledWidth)
@@ -38,3 +43,6 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.x += dx
         self.rect.y += dy
+
+    def draw(self):
+        screen.blit(self.img, self.rect)
