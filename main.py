@@ -11,7 +11,7 @@ screenHeight = int(0.8 * screenWidth)
 screen = pygame.display.set_mode((screenWidth, screenHeight))
 pygame.display.set_caption("Comtra")
 
-player = Player(200, 200, 1)
+player = Player(200, 200, 5)
 
 # game loop
 gameRunning = True

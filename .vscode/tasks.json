@@ -4,9 +4,9 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "run python file",
+			"label": "runner",
 			"type": "shell",
-			"command": "source comtra-env/scripts/activate && python ${relativeFile}",
+			"command": "source comtra-env/scripts/activate && python main.py",
 
 			"group": {
 				"kind": "build",
