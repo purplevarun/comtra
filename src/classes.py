@@ -5,7 +5,6 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, scale, defaultSize=50):
         pygame.sprite.Sprite.__init__(self)
         img = pygame.image.load("./src//freedinosprite/png/Idle (1).png")
-        print("orig width = {}".format(img.get_width()))
         scaledWidth = defaultSize*scale
         scaledHeight = scaledWidth * (img.get_height()/img.get_width())
         scaledWidth = int(scaledWidth)
