@@ -27,7 +27,7 @@ moving_down = False
 clock = pygame.time.Clock()
 FPS = 60
 
-player = Player("player", 200, 200, 5)
+player = Player("player", 200, 200, 2)
 player2 = Player("player", 400, 400, 4)
 
 # game loop
@@ -41,7 +41,6 @@ while gameRunning:
     # fps
     clock.tick(FPS)
 
-    #
     player.update_animation()
 
     # load sprite
