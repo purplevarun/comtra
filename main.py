@@ -25,7 +25,7 @@ while gameRunning:  # inf game loop
 
     if player.Alive:
         # update actions (idle, running.. etc)
-        if moving_horizontally():
+        if moving_left or moving_right:
             player.update_action(1)  # 1 - running
         else:
             player.update_action(0)  # 0 - idle
@@ -62,7 +62,7 @@ while gameRunning:  # inf game loop
             if key == pygame.K_d or key == pygame.K_RIGHT:
                 moving_right = status
             # move up
-            if (key == pygame.K_w or key == pygame.K_SPACE) and player.Alive:
+            if (key == pygame.K_w or key == pygame.K_SPACE or key == pygame.K_UP) and player.Alive:
                 player.jump = True
 
         if event.type == pygame.KEYUP:

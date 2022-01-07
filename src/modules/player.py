@@ -1,5 +1,6 @@
 # modules
 import pygame
+from src.modules.userDefinedFunctions import *
 from src.modules.gameVariables import *
 
 from src.modules.mainScreen import *
@@ -70,6 +71,10 @@ class Player(pygame.sprite.Sprite):
         if self.vel_y > 10:
             self.vel_y
         dy += self.vel_y
+
+        # floor collision
+        if self.rect.bottom + dy > FLOOR:
+            dy = FLOOR - self.rect.bottom
 
         self.rect.x += dx
         self.rect.y += dy
