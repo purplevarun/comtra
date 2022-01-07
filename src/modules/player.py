@@ -1,5 +1,6 @@
 # modules
 import pygame
+from src.modules.gameVariables import *
 
 from src.modules.mainScreen import *
 
@@ -7,6 +8,9 @@ from src.modules.mainScreen import *
 class Player(pygame.sprite.Sprite):
     def __init__(self, playerType, x, y, scale, defaultSize=50, speed=5):
         pygame.sprite.Sprite.__init__(self)
+        self.Alive = True
+        self.jump = False
+        self.vel_y = 0
         self.animation_list = []
         self.update_time = pygame.time.get_ticks()
         self.action = 0  # 0 for idle, 1 for run
@@ -57,11 +61,15 @@ class Player(pygame.sprite.Sprite):
         if right:
             dx = self.speed
             self.flip = False
-        if up:
-            dy = self.speed
+        if self.jump:
+            self.vel_y = -11
+            self.jump = False
 
-        if down:
-            dy = -self.speed
+        # gravity
+        self.vel_y += GRAVITY
+        if self.vel_y > 10:
+            self.vel_y
+        dy += self.vel_y
 
         self.rect.x += dx
         self.rect.y += dy

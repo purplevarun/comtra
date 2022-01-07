@@ -6,8 +6,8 @@
 		{
 			"label": "runner",
 			"type": "shell",
-			"command": "source comtra-env/scripts/activate && python main.py",
-
+			// "command": "comtra-env/scripts/activate && python main.py", // for bash
+			"command": "comtra-env\\scripts\\activate && python main.py", // for cmd
 			"group": {
 				"kind": "build",
 				"isDefault": true
