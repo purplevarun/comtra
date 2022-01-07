@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.update_time = pygame.time.get_ticks()
         self.action = 0  # 0 for idle, 1 for run
         temp_list = []
-        for i in range(4):
+        for i in range(2):
             img = pygame.image.load(
                 "./src/images/sprites/{}/idle/{}.png".format(playerType, i)
             )
@@ -30,7 +30,7 @@ class Player(pygame.sprite.Sprite):
             temp_list.append(img)
         self.animation_list.append(temp_list)
         temp_list = []
-        for i in range(4):
+        for i in range(2):
             img = pygame.image.load(
                 "./src/images/sprites/{}/run/{}.png".format(playerType, i)
             )

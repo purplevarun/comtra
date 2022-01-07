@@ -10,7 +10,7 @@ from src.modules.mainScreen import *
 # initialization
 
 
-player = Player("player", 200, 400, 2)
+player = Player("player", 200, 400, 5)
 player2 = Player("player", 400, 400, 4)
 
 # game loop
