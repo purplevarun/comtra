@@ -21,6 +21,18 @@ class Player(pygame.sprite.Sprite):
             img = pygame.transform.scale(img, (scaledWidth, scaledHeight))
 
             self.animation_list.append(img)
+        for i in range(4):
+            img = pygame.image.load(
+                "./src/images/sprites/{}/run/{}.png".format(playerType, i)
+            )
+            scaledWidth = defaultSize*scale
+            scaledHeight = scaledWidth * (img.get_height()/img.get_width())
+            scaledWidth = int(scaledWidth)
+            scaledHeight = int(scaledHeight)
+
+            img = pygame.transform.scale(img, (scaledWidth, scaledHeight))
+
+            self.animation_list.append(img)
         self.frameIndex = 0
         self.image = self.animation_list[self.frameIndex]
         self.rect = self.image.get_rect()
