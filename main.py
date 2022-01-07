@@ -17,7 +17,14 @@ def draw(*x):
         screen.blit(i.img, i.rect)
 
 
+def moving():
+    if moving_left or moving_right or moving_up or moving_down:
+        return True
+    return False
+
+
 # initialization
+
 
 moving_left = False
 moving_right = False
@@ -41,6 +48,13 @@ while gameRunning:
     # fps
     clock.tick(FPS)
 
+    # update actions (idle, running.. etc)
+    if moving():
+        player.update_action(1)  # 1 - running
+    else:
+        player.update_action(0)  # 0 - idle
+
+    # update frames
     player.update_animation()
 
     # load sprite

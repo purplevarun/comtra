@@ -9,6 +9,8 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.animation_list = []
         self.update_time = pygame.time.get_ticks()
+        self.action = 0  # 0 for idle, 1 for run
+        temp_list = []
         for i in range(4):
             img = pygame.image.load(
                 "./src/images/sprites/{}/idle/{}.png".format(playerType, i)
@@ -20,7 +22,9 @@ class Player(pygame.sprite.Sprite):
 
             img = pygame.transform.scale(img, (scaledWidth, scaledHeight))
 
-            self.animation_list.append(img)
+            temp_list.append(img)
+        self.animation_list.append(temp_list)
+        temp_list = []
         for i in range(4):
             img = pygame.image.load(
                 "./src/images/sprites/{}/run/{}.png".format(playerType, i)
@@ -32,9 +36,10 @@ class Player(pygame.sprite.Sprite):
 
             img = pygame.transform.scale(img, (scaledWidth, scaledHeight))
 
-            self.animation_list.append(img)
+            temp_list.append(img)
+        self.animation_list.append(temp_list)
         self.frameIndex = 0
-        self.image = self.animation_list[self.frameIndex]
+        self.image = self.animation_list[self.action][self.frameIndex]
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
@@ -63,12 +68,20 @@ class Player(pygame.sprite.Sprite):
 
     def update_animation(self):
         ANIMATION_COOLDOWN = 100
-        self.image = self.animation_list[self.frameIndex]
+        self.image = self.animation_list[self.action][self.frameIndex]
         if pygame.time.get_ticks()-self.update_time > ANIMATION_COOLDOWN:
             self.update_time = pygame.time.get_ticks()
             self.frameIndex += 1
-            if self.frameIndex >= len(self.animation_list):
+            if self.frameIndex >= len(self.animation_list[self.action]):
                 self.frameIndex = 0
+
+    def update_action(self, new_action):
+        if self.action == new_action:
+            return
+
+        self.action = new_action
+        self.frameIndex = 0
+        self.update_time = pygame.time.get_ticks()
 
     def draw(self):
         afterRotationImg = pygame.transform.flip(self.image, self.flip, False)
