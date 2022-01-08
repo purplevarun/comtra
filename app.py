@@ -20,7 +20,7 @@ while gameRunning:  # inf game loop
         # update actions (idle, running, jumping)
         if shoot:
             player.shoot()
-            player.update_action(3)
+            player.update_action(3)  # 3 - shooting
         elif player.in_air:
             player.update_action(2)  # 2 - jumping
         elif moving_left or moving_right:
