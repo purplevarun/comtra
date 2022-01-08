@@ -31,7 +31,10 @@ while gameRunning:  # inf game loop
 
     if player.Alive:
         # update actions (idle, running, jumping)
-
+        if shoot:
+            bullet = Bullet(player.rect.centerx,
+                            player.rect.centery, player.direction)
+            bullet_group.add(bullet)
         if player.in_air:
             player.update_action(2)  # 2 - jumping
         elif moving_left or moving_right:
@@ -71,8 +74,11 @@ while gameRunning:  # inf game loop
             if key == pygame.K_d or key == pygame.K_RIGHT:
                 moving_right = status
             # move up
-            if (key == pygame.K_w or key == pygame.K_SPACE or key == pygame.K_UP) and player.Alive:
+            if (key == pygame.K_w or key == pygame.K_UP) and player.Alive:
                 player.jump = True
+
+            if key == pygame.K_SPACE:
+                shoot = True
 
         if event.type == pygame.KEYUP:
             key = event.key
@@ -86,6 +92,9 @@ while gameRunning:  # inf game loop
             # move up
             if key == pygame.K_s or key == pygame.K_DOWN:
                 moving_up = status
+
+            if key == pygame.K_SPACE:
+                shoot = False
 
     pygame.display.update()
 
