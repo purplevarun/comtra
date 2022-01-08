@@ -1,18 +1,8 @@
-# import python modules
 import pygame
+from src.scripts.Global import *
+from src.scripts.functions import *
+from src.scripts.main import *
 
-# import local modules
-from src.modules.player import *
-from src.modules.userDefinedFunctions import *
-from src.modules.gameVariables import *
-from src.modules.mainScreen import *
-from src.modules.bullet import *
-
-
-# initialization
-
-
-# game loop
 gameRunning = True
 while gameRunning:  # inf game loop
 

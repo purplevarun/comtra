@@ -1,9 +1,5 @@
 import pygame
-from src.modules.gameVariables import *
-from src.modules.mainScreen import *
-# user defined functions
-
-FLOOR = 700
+from src.scripts.Global import *
 
 
 def draw_bg():

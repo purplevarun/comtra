@@ -1,9 +1,6 @@
-# modules
 import pygame
-from src.modules.userDefinedFunctions import *
-from src.modules.gameVariables import *
-from src.modules.mainScreen import *
-from src.modules.bullet import *
+from src.scripts.Global import *
+from src.scripts.functions import *
 
 
 class Player(pygame.sprite.Sprite):
@@ -123,10 +120,6 @@ class Player(pygame.sprite.Sprite):
         screen.blit(afterRotationImg, self.rect)
 
 
-player = Player("player", x=200, y=400, scale=5)
-enemy = Player("player", x=400, y=400, scale=4)
-
-
 class Bullet (pygame.sprite.Sprite):
     def __init__(self, x, y, direction):
         pygame.sprite.Sprite.__init__(self)
@@ -150,6 +143,10 @@ class Bullet (pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(enemy, bullet_group, False):
             if enemy.alive:
                 self.kill()
+
+
+player = Player("player", x=200, y=400, scale=5)
+enemy = Player("player", x=400, y=400, scale=4)
 
 
 bullet_group = pygame.sprite.Group()

@@ -1,5 +1,6 @@
+# this script will only export
 import pygame
-from src.modules.player import *
+
 
 clock = pygame.time.Clock()
 FPS = 60
@@ -25,3 +26,19 @@ new_bullet_width = int(new_bullet_width)
 new_bullet_height = int(new_bullet_height)
 bullet_img = pygame.transform.scale(
     bullet_img, (new_bullet_width, new_bullet_height))
+
+
+pygame.init()
+
+screenWidth = pygame.display.Info().current_w
+screenHeight = pygame.display.Info().current_h
+pygame.display.set_caption("Comtra")
+
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)  # fullscreen mode
+
+# screenWidth = 800
+# screenHeight = int(0.8 * screenWidth)
+# screen = pygame.display.set_mode((screenWidth, screenHeight)) # windowed
+
+
+FLOOR = 700
