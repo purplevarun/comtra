@@ -12,5 +12,12 @@ class Bullet (pygame.sprite.Sprite):
         self.rect.center = (x, y)
         self.direction = direction
 
+    def update(self):
+
+        self.rect.x += self.direction * self.speed
+
+        if self.rect.right < 0 or self.rect.left > screenWidth:
+            self.kill()
+
 
 bullet_group = pygame.sprite.Group()

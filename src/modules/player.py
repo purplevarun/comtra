@@ -3,15 +3,18 @@ import pygame
 from src.modules.userDefinedFunctions import *
 from src.modules.gameVariables import *
 from src.modules.mainScreen import *
+from src.modules.bullet import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, playerType, x, y, scale, defaultSize=50, speed=5):
+    def __init__(self, playerType, x, y, scale, defaultSize=50, speed=5, ammo=20):
         pygame.sprite.Sprite.__init__(self)
         self.Alive = True
         self.playerType = playerType
         self.scale = scale
         self.defaultSize = defaultSize
+        self.ammo = ammo
+        self.start_ammo = ammo
         self.jump = False
         self.in_air = True
         self.vel_y = 0
@@ -22,6 +25,7 @@ class Player(pygame.sprite.Sprite):
         self.add_images('idle')
         self.add_images('run')
         self.add_images('jump')
+        self.add_images('shoot')
 
         self.frameIndex = 0
         self.image = self.animation_list[self.action][self.frameIndex]
@@ -29,8 +33,23 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (x, y)
 
         self.speed = speed
+        self.shoot_cooldown = 0
         self.flip = False
         self.direction = 1
+
+    def update(self):
+        self.update_animation()
+
+        if self.shoot_cooldown > 0:
+            self.shoot_cooldown -= 1
+
+    def shoot(self):
+        if self.shoot_cooldown == 0 and self.ammo > 0:
+            self.shoot_cooldown = 20
+            self.ammo -= 1
+            bullet = Bullet(self.rect.centerx + self.direction*0.6 *
+                            self.rect.size[0], self.rect.centery, self.direction)
+            bullet_group.add(bullet)
 
     def add_images(self, type):
         temp_list = []

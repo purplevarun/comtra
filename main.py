@@ -12,8 +12,8 @@ from src.modules.bullet import *
 # initialization
 
 
-player = Player("player", 200, 400, 5)
-player2 = Player("player", 400, 400, 4)
+player = Player("player", x=200, y=400, scale=5)
+player2 = Player("player", x=400, y=400, scale=4)
 
 # game loop
 gameRunning = True
@@ -32,10 +32,9 @@ while gameRunning:  # inf game loop
     if player.Alive:
         # update actions (idle, running, jumping)
         if shoot:
-            bullet = Bullet(player.rect.centerx,
-                            player.rect.centery, player.direction)
-            bullet_group.add(bullet)
-        if player.in_air:
+            player.shoot()
+            player.update_action(3)
+        elif player.in_air:
             player.update_action(2)  # 2 - jumping
         elif moving_left or moving_right:
             player.update_action(1)  # 1 - running
@@ -43,7 +42,7 @@ while gameRunning:  # inf game loop
             player.update_action(0)  # 0 - idle
 
     # update frames
-    player.update_animation()
+    player.update()
 
     # load sprite
     player.draw()

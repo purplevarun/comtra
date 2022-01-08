@@ -16,7 +16,7 @@ RED = (255, 0, 0)
 
 bullet_img = pygame.image.load(
     "./src/images/objects/bullet.png")
-scale = 1
+scale = 3
 new_bullet_width = scale * bullet_img.get_width()
 new_bullet_height = (bullet_img.get_height() /
                      bullet_img.get_width()) * new_bullet_width
