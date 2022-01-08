@@ -24,8 +24,11 @@ while gameRunning:  # inf game loop
     clock.tick(FPS)
 
     if player.Alive:
-        # update actions (idle, running.. etc)
-        if moving_left or moving_right:
+        # update actions (idle, running, jumping)
+
+        if player.in_air:
+            player.update_action(2)  # 2 - jumping
+        elif moving_left or moving_right:
             player.update_action(1)  # 1 - running
         else:
             player.update_action(0)  # 0 - idle
@@ -38,7 +41,7 @@ while gameRunning:  # inf game loop
     # player2.draw()
 
     # move sprite
-    player.move(moving_left, moving_right, moving_up, moving_down)
+    player.move(moving_left, moving_right)
     # player2.move(moving_left, moving_right, moving_up, moving_down)
 
     # actions

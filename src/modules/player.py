@@ -10,39 +10,20 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, playerType, x, y, scale, defaultSize=50, speed=5):
         pygame.sprite.Sprite.__init__(self)
         self.Alive = True
+        self.playerType = playerType
+        self.scale = scale
+        self.defaultSize = defaultSize
         self.jump = False
+        self.in_air = True
         self.vel_y = 0
         self.animation_list = []
         self.update_time = pygame.time.get_ticks()
         self.action = 0  # 0 for idle, 1 for run
-        temp_list = []
-        for i in range(2):
-            img = pygame.image.load(
-                "./src/images/sprites/{}/idle/{}.png".format(playerType, i)
-            )
-            scaledWidth = defaultSize*scale
-            scaledHeight = scaledWidth * (img.get_height()/img.get_width())
-            scaledWidth = int(scaledWidth)
-            scaledHeight = int(scaledHeight)
 
-            img = pygame.transform.scale(img, (scaledWidth, scaledHeight))
+        self.add_images('idle')
+        self.add_images('run')
+        self.add_images('jump')
 
-            temp_list.append(img)
-        self.animation_list.append(temp_list)
-        temp_list = []
-        for i in range(2):
-            img = pygame.image.load(
-                "./src/images/sprites/{}/run/{}.png".format(playerType, i)
-            )
-            scaledWidth = defaultSize*scale
-            scaledHeight = scaledWidth * (img.get_height()/img.get_width())
-            scaledWidth = int(scaledWidth)
-            scaledHeight = int(scaledHeight)
-
-            img = pygame.transform.scale(img, (scaledWidth, scaledHeight))
-
-            temp_list.append(img)
-        self.animation_list.append(temp_list)
         self.frameIndex = 0
         self.image = self.animation_list[self.action][self.frameIndex]
         self.rect = self.image.get_rect()
@@ -51,7 +32,24 @@ class Player(pygame.sprite.Sprite):
         self.speed = speed
         self.flip = False
 
-    def move(self, left, right, up, down):
+    def add_images(self, type):
+        temp_list = []
+        for i in range(2):
+            img = pygame.image.load(
+                "./src/images/sprites/{}/{}/{}.png".format(
+                    self.playerType, type, i)
+            )
+            scaledWidth = self.defaultSize*self.scale
+            scaledHeight = scaledWidth * (img.get_height()/img.get_width())
+            scaledWidth = int(scaledWidth)
+            scaledHeight = int(scaledHeight)
+
+            img = pygame.transform.scale(img, (scaledWidth, scaledHeight))
+
+            temp_list.append(img)
+        self.animation_list.append(temp_list)
+
+    def move(self, left, right):
 
         dx = 0
         dy = 0
@@ -62,9 +60,10 @@ class Player(pygame.sprite.Sprite):
         if right:
             dx = self.speed
             self.flip = False
-        if self.jump:
+        if self.jump and (not self.in_air):
             self.vel_y = -11
             self.jump = False
+            self.in_air = True
 
         # gravity
         self.vel_y += GRAVITY
@@ -75,6 +74,7 @@ class Player(pygame.sprite.Sprite):
         # floor collision
         if self.rect.bottom + dy > FLOOR:
             dy = FLOOR - self.rect.bottom
+            self.in_air = False
 
         self.rect.x += dx
         self.rect.y += dy
