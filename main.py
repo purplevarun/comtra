@@ -6,6 +6,8 @@ from src.modules.player import *
 from src.modules.userDefinedFunctions import *
 from src.modules.gameVariables import *
 from src.modules.mainScreen import *
+from src.modules.bullet import *
+
 
 # initialization
 
@@ -19,6 +21,10 @@ while gameRunning:  # inf game loop
 
     # background reset
     draw_bg()
+
+    # bullet
+    bullet_group.update()
+    bullet_group.draw(screen)
 
     # fps
     clock.tick(FPS)

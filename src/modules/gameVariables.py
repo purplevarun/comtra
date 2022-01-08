@@ -12,3 +12,7 @@ moving_down = False
 GRAVITY = 0.75
 BG_COLOR = (144, 201, 100)
 RED = (255, 0, 0)
+
+
+bullet_img = pygame.image.load(
+    "./src/images/objects/bullet.png")

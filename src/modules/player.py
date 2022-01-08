@@ -2,7 +2,6 @@
 import pygame
 from src.modules.userDefinedFunctions import *
 from src.modules.gameVariables import *
-
 from src.modules.mainScreen import *
 
 
