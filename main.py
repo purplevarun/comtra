@@ -12,9 +12,6 @@ from src.modules.bullet import *
 # initialization
 
 
-player = Player("player", x=200, y=400, scale=5)
-player2 = Player("player", x=400, y=400, scale=4)
-
 # game loop
 gameRunning = True
 while gameRunning:  # inf game loop
@@ -46,11 +43,10 @@ while gameRunning:  # inf game loop
 
     # load sprite
     player.draw()
-    # player2.draw()
+    enemy.draw()
 
     # move sprite
     player.move(moving_left, moving_right)
-    # player2.move(moving_left, moving_right, moving_up, moving_down)
 
     # actions
     for event in pygame.event.get():

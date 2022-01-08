@@ -121,3 +121,35 @@ class Player(pygame.sprite.Sprite):
     def draw(self):
         afterRotationImg = pygame.transform.flip(self.image, self.flip, False)
         screen.blit(afterRotationImg, self.rect)
+
+
+player = Player("player", x=200, y=400, scale=5)
+enemy = Player("player", x=400, y=400, scale=4)
+
+
+class Bullet (pygame.sprite.Sprite):
+    def __init__(self, x, y, direction):
+        pygame.sprite.Sprite.__init__(self)
+        self.speed = 10
+        self.image = bullet_img
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.direction = direction
+
+    def update(self):
+
+        self.rect.x += self.direction * self.speed
+
+        if self.rect.right < 0 or self.rect.left > screenWidth:
+            self.kill()
+
+        if pygame.sprite.spritecollide(player, bullet_group, False):
+            if player.alive:
+                self.kill()
+
+        if pygame.sprite.spritecollide(enemy, bullet_group, False):
+            if enemy.alive:
+                self.kill()
+
+
+bullet_group = pygame.sprite.Group()

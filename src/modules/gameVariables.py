@@ -1,4 +1,5 @@
 import pygame
+from src.modules.player import *
 
 clock = pygame.time.Clock()
 FPS = 60
