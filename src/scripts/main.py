@@ -8,6 +8,8 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.Alive = True
         self.playerType = playerType
+        self.max_health = 100
+        self.health = 100
         self.scale = scale
         self.defaultSize = defaultSize
         self.ammo = ammo
@@ -19,10 +21,11 @@ class Player(pygame.sprite.Sprite):
         self.update_time = pygame.time.get_ticks()
         self.action = 0  # 0 for idle, 1 for run
 
-        self.add_images('idle')
-        self.add_images('run')
-        self.add_images('jump')
-        self.add_images('shoot')
+        self.add_images('idle', 2)
+        self.add_images('run', 2)
+        self.add_images('jump', 2)
+        self.add_images('shoot', 2)
+        self.add_images('death', 5)
 
         self.frameIndex = 0
         self.image = self.animation_list[self.action][self.frameIndex]
@@ -36,6 +39,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.update_animation()
+        self.check_alive()
 
         if self.shoot_cooldown > 0:
             self.shoot_cooldown -= 1
@@ -48,9 +52,9 @@ class Player(pygame.sprite.Sprite):
                             self.rect.size[0], self.rect.centery, self.direction)
             bullet_group.add(bullet)
 
-    def add_images(self, type):
+    def add_images(self, type, n):
         temp_list = []
-        for i in range(2):
+        for i in range(n):
             img = pygame.image.load(
                 "./src/images/sprites/{}/{}/{}.png".format(
                     self.playerType, type, i)
@@ -105,7 +109,10 @@ class Player(pygame.sprite.Sprite):
             self.update_time = pygame.time.get_ticks()
             self.frameIndex += 1
             if self.frameIndex >= len(self.animation_list[self.action]):
-                self.frameIndex = 0
+                if self.action == 4:  # 4 - death
+                    self.frameIndex = len(self.animation_list[self.action]) - 1
+                else:
+                    self.frameIndex = 0
 
     def update_action(self, new_action):
         if self.action == new_action:
@@ -114,6 +121,13 @@ class Player(pygame.sprite.Sprite):
         self.action = new_action
         self.frameIndex = 0
         self.update_time = pygame.time.get_ticks()
+
+    def check_alive(self):
+        if self.health <= 0:
+            self.health = 0
+            self.speed = 0
+            self.alive = 0
+            self.update_action(4)  # 4- death
 
     def draw(self):
         afterRotationImg = pygame.transform.flip(self.image, self.flip, False)
@@ -139,14 +153,17 @@ class Bullet (pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(player, bullet_group, False):
             if player.alive:
                 self.kill()
+                player.health -= 10
 
         if pygame.sprite.spritecollide(enemy, bullet_group, False):
             if enemy.alive:
                 self.kill()
+                enemy.health -= 25
+                print("health = {}".format(enemy.health))
 
 
-player = Player("player", x=200, y=400, scale=5)
-enemy = Player("player", x=400, y=400, scale=4)
+player = Player("player", x=200, y=200, scale=4)
+enemy = Player("player", x=400, y=550, scale=4)
 
 
 bullet_group = pygame.sprite.Group()

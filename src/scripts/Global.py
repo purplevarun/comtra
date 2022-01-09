@@ -38,7 +38,7 @@ screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)  # fullscreen mode
 
 # screenWidth = 800
 # screenHeight = int(0.8 * screenWidth)
-# screen = pygame.display.set_mode((screenWidth, screenHeight)) # windowed
+# screen = pygame.display.set_mode((screenWidth, screenHeight))  # windowed
 
 
 FLOOR = 700

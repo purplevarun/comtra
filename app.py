@@ -30,6 +30,7 @@ while gameRunning:  # inf game loop
 
     # update frames
     player.update()
+    enemy.update()
 
     # load sprite
     player.draw()
