@@ -21,11 +21,12 @@ class Player(pygame.sprite.Sprite):
         self.update_time = pygame.time.get_ticks()
         self.action = 0  # 0 for idle, 1 for run
 
-        self.add_images('idle', 2)
-        self.add_images('run', 2)
-        self.add_images('jump', 2)
-        self.add_images('shoot', 2)
-        self.add_images('death', 5)
+        self.add_images('idle', 2)  # 0
+        self.add_images('run', 2)  # 1
+        self.add_images('jump', 2)  # 2
+        self.add_images('shoot', 2)  # 3
+        self.add_images('death', 5)  # 4
+        self.add_images('grenade', 2)  # 5
 
         self.frameIndex = 0
         self.image = self.animation_list[self.action][self.frameIndex]
@@ -134,6 +135,17 @@ class Player(pygame.sprite.Sprite):
         screen.blit(afterRotationImg, self.rect)
 
 
+class Grenade (pygame.sprite.Sprite):
+    def __init__(self, x, y, direction):
+        pygame.sprite.Sprite.__init__(self)
+        self.speed = 10
+        self.vel_y = -11
+        self.image = grenade_img
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.direction = direction
+
+
 class Bullet (pygame.sprite.Sprite):
     def __init__(self, x, y, direction):
         pygame.sprite.Sprite.__init__(self)
@@ -163,7 +175,8 @@ class Bullet (pygame.sprite.Sprite):
 
 
 player = Player("player", x=200, y=200, scale=4)
-enemy = Player("player", x=400, y=550, scale=4)
+enemy = Player("player", x=800, y=550, scale=4)
 
 
 bullet_group = pygame.sprite.Group()
+grenade_group = pygame.sprite.Group()
