@@ -25,11 +25,12 @@ while gameRunning:  # inf game loop
         if shoot:
             player.shoot()
             player.update_action(3)  # 3 - shooting
-        elif grenade:
-            player.update_action(5)
+        elif grenade and not grenade_thrown:
+            player.update_action(5)  # 5 - grenade throw
             grenade = Grenade(player.rect.centerx + 0.5*player.direction*player.rect.size[0],
                               player.rect.top, player.direction)
             grenade_group.add(grenade)
+            grenade_thrown = True
         elif player.in_air:
             player.update_action(2)  # 2 - jumping
         elif moving_left or moving_right:

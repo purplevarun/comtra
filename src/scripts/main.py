@@ -4,11 +4,12 @@ from src.scripts.functions import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, playerType, x, y, scale, defaultSize=50, speed=5, ammo=20):
+    def __init__(self, playerType, x, y, scale, defaultSize=50, speed=5, ammo=20, grenade_ammo=3):
         pygame.sprite.Sprite.__init__(self)
         self.Alive = True
         self.playerType = playerType
         self.max_health = 100
+        self.grenade_ammo = grenade_ammo
         self.health = 100
         self.scale = scale
         self.defaultSize = defaultSize

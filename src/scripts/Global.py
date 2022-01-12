@@ -11,6 +11,7 @@ moving_up = False
 moving_down = False
 shoot = False
 grenade = False
+grenade_thrown = False
 
 GRAVITY = 0.75
 BG_COLOR = (144, 201, 100)
