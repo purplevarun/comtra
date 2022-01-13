@@ -128,8 +128,9 @@ class Player(pygame.sprite.Sprite):
         if self.health <= 0:
             self.health = 0
             self.speed = 0
-            self.alive = 0
+            self.Alive = False
             self.update_action(4)  # 4- death
+            self.kill()
 
     def draw(self):
         afterRotationImg = pygame.transform.flip(self.image, self.flip, False)
@@ -170,6 +171,13 @@ class Grenade (pygame.sprite.Sprite):
             self.kill()
             explsn = Explosion(self.rect.x, self.rect.y)
             explosion_group.add(explsn)
+            # do damage to nearby players
+            if abs(self.rect.centerx-player.rect.centerx) < TILE_SIZE*5 and abs(self.rect.centery-player.rect.centery) < TILE_SIZE*5:
+                player.health -= 100
+
+            for enemy in enemy_group:
+                if abs(self.rect.centerx-enemy.rect.centerx) < TILE_SIZE*5 and abs(self.rect.centery-enemy.rect.centery) < TILE_SIZE*5:
+                    enemy.health -= 100
 
 
 class Explosion(pygame.sprite.Sprite):
@@ -184,6 +192,17 @@ class Explosion(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.counter = 0
+
+    def update(self):
+        EXPLOSION_SPEED = 4
+        self.counter += 1
+        if self.counter >= EXPLOSION_SPEED:
+            self.counter = 0
+            self.index += 1
+            if self.index >= len(self.images):
+                self.kill()
+            else:
+                self.image = self.images[self.index]
 
 
 class Bullet (pygame.sprite.Sprite):
@@ -211,13 +230,13 @@ class Bullet (pygame.sprite.Sprite):
             if enemy.alive:
                 self.kill()
                 enemy.health -= 25
-                print("health = {}".format(enemy.health))
-
-
-player = Player("player", x=200, y=200, scale=4)
-enemy = Player("player", x=800, y=550, scale=4)
 
 
 bullet_group = pygame.sprite.Group()
 grenade_group = pygame.sprite.Group()
 explosion_group = pygame.sprite.Group()
+enemy_group = pygame.sprite.Group()
+
+player = Player("player", x=200, y=200, scale=4)
+enemy = Player("player", x=800, y=550, scale=4)
+enemy_group.add(enemy)

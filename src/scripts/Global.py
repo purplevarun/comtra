@@ -14,6 +14,7 @@ grenade = False
 grenade_thrown = False
 
 GRAVITY = 0.75
+TILE_SIZE = 40
 BG_COLOR = (144, 201, 100)
 RED = (255, 0, 0)
 
