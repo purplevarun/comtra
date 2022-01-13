@@ -146,6 +146,37 @@ class Grenade (pygame.sprite.Sprite):
         self.rect.center = (x, y)
         self.direction = direction
 
+    def update(self):
+        self.vel_y += GRAVITY
+        dx = self.direction*self.speed
+        dy = self.vel_y
+
+        if self.rect.bottom + dy > FLOOR:
+            dy = FLOOR-self.rect.bottom
+            self.speed = 0
+
+        if self.rect.left + dx < 0 or self.rect.right + dx > screenWidth:
+            self.direction *= -1
+            dx = self.direction*self.speed
+
+        # update position
+        self.rect.x += dx
+        self.rect.y += dy
+
+
+class Explosion(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.images = []
+        for i in range(1, 5+1):
+            img = resize_image(f"./src/images/others/explosion/exp{i}.png")
+
+        self.index = 0
+        self.image = self.images[self.index]
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.counter = 0
+
 
 class Bullet (pygame.sprite.Sprite):
     def __init__(self, x, y, direction):
@@ -181,3 +212,4 @@ enemy = Player("player", x=800, y=550, scale=4)
 
 bullet_group = pygame.sprite.Group()
 grenade_group = pygame.sprite.Group()
+explosion_group = pygame.sprite.Group()

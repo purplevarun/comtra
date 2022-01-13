@@ -17,6 +17,10 @@ while gameRunning:  # inf game loop
     grenade_group.update()
     grenade_group.draw(screen)
 
+    # explosion
+    explosion_group.update()
+    explosion_group.draw(screen)
+
     # fps
     clock.tick(FPS)
 
@@ -25,12 +29,13 @@ while gameRunning:  # inf game loop
         if shoot:
             player.shoot()
             player.update_action(3)  # 3 - shooting
-        elif grenade and not grenade_thrown:
+        elif grenade and not grenade_thrown and player.grenade_ammo > 0:
             player.update_action(5)  # 5 - grenade throw
             grenade = Grenade(player.rect.centerx + 0.5*player.direction*player.rect.size[0],
                               player.rect.top, player.direction)
             grenade_group.add(grenade)
             grenade_thrown = True
+            player.grenade_ammo -= 1
         elif player.in_air:
             player.update_action(2)  # 2 - jumping
         elif moving_left or moving_right:
@@ -97,6 +102,7 @@ while gameRunning:  # inf game loop
 
             if key == pygame.K_g:
                 grenade = False
+                grenade_thrown = False
 
     pygame.display.update()
 
