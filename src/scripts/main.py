@@ -237,6 +237,6 @@ grenade_group = pygame.sprite.Group()
 explosion_group = pygame.sprite.Group()
 enemy_group = pygame.sprite.Group()
 
-player = Player("player", x=200, y=200, scale=4)
+player = Player("enemy", x=200, y=200, scale=4)
 enemy = Player("player", x=800, y=550, scale=4)
 enemy_group.add(enemy)
