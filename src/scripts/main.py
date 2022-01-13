@@ -139,6 +139,7 @@ class Player(pygame.sprite.Sprite):
 class Grenade (pygame.sprite.Sprite):
     def __init__(self, x, y, direction):
         pygame.sprite.Sprite.__init__(self)
+        self.timer = 100
         self.speed = 10
         self.vel_y = -11
         self.image = grenade_img
@@ -163,6 +164,13 @@ class Grenade (pygame.sprite.Sprite):
         self.rect.x += dx
         self.rect.y += dy
 
+        # grenade boom
+        self.timer -= 1
+        if self.timer < 0:
+            self.kill()
+            explsn = Explosion(self.rect.x, self.rect.y)
+            explosion_group.add(explsn)
+
 
 class Explosion(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -170,7 +178,7 @@ class Explosion(pygame.sprite.Sprite):
         self.images = []
         for i in range(1, 5+1):
             img = resize_image(f"./src/images/others/explosion/exp{i}.png")
-
+            self.images.append(img)
         self.index = 0
         self.image = self.images[self.index]
         self.rect = self.image.get_rect()
