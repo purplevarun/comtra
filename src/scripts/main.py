@@ -224,12 +224,13 @@ class Bullet (pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(player, bullet_group, False):
             if player.alive:
                 self.kill()
-                player.health -= 10
+                player.health -= 20
 
-        if pygame.sprite.spritecollide(enemy, bullet_group, False):
-            if enemy.alive:
-                self.kill()
-                enemy.health -= 25
+        for enemy in enemy_group:
+            if pygame.sprite.spritecollide(enemy, bullet_group, False):
+                if enemy.alive:
+                    self.kill()
+                    enemy.health -= 25
 
 
 bullet_group = pygame.sprite.Group()
@@ -237,6 +238,8 @@ grenade_group = pygame.sprite.Group()
 explosion_group = pygame.sprite.Group()
 enemy_group = pygame.sprite.Group()
 
-player = Player("enemy", x=200, y=200, scale=4)
-enemy = Player("player", x=800, y=550, scale=4)
+player = Player("player", x=200, y=200, scale=4)
+enemy = Player("enemy", x=800, y=550, scale=4)
+enemy2 = Player("player", x=400, y=550, scale=4)
 enemy_group.add(enemy)
+enemy_group.add(enemy2)

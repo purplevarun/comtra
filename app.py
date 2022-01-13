@@ -45,11 +45,12 @@ while gameRunning:  # inf game loop
 
     # update frames
     player.update()
-    enemy.update()
+    player.draw()
 
     # load sprite
-    player.draw()
-    enemy.draw()
+    for enemy in enemy_group:
+        enemy.draw()
+        enemy.update()
 
     # move sprite
     player.move(moving_left, moving_right)
