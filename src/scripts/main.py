@@ -233,13 +233,24 @@ class Bullet (pygame.sprite.Sprite):
                     enemy.health -= 25
 
 
+class ItemBox (pygame.sprite.Sprite):
+    def __init__(self, type, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.type = type
+        self.image = item_boxes[type]
+        self.rect = self.image.get_rect()
+        self.rect.midtop = (x + TILE_SIZE//2, y +
+                            (TILE_SIZE-self.image.get_height()))
+
+
 bullet_group = pygame.sprite.Group()
 grenade_group = pygame.sprite.Group()
 explosion_group = pygame.sprite.Group()
-enemy_group = pygame.sprite.Group()
+# enemy_group = pygame.sprite.Group()
+enemy_group = []
 
 player = Player("player", x=200, y=200, scale=4)
 enemy = Player("enemy", x=800, y=550, scale=4)
 enemy2 = Player("player", x=400, y=550, scale=4)
-enemy_group.add(enemy)
-enemy_group.add(enemy2)
+enemy_group.append(enemy)
+enemy_group.append(enemy2)
