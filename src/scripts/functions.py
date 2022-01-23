@@ -10,3 +10,11 @@ def draw_bg():
 def draw(*x):
     for i in x:
         screen.blit(i.img, i.rect)
+
+
+font = pygame.font.SysFont("JetBrainsMono", 30)
+
+
+def draw_text(text, font, col, x, y):
+    img = font.render(text, True, col)
+    screen.blit(img, (x, y))

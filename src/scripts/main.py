@@ -4,7 +4,7 @@ from src.scripts.functions import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, playerType, x, y, scale, defaultSize=50, speed=5, ammo=20, grenade_ammo=3):
+    def __init__(self, playerType, x, y, scale, defaultSize=50, speed=5, ammo=10, grenade_ammo=3):
         pygame.sprite.Sprite.__init__(self)
         self.Alive = True
         self.playerType = playerType
@@ -242,15 +242,38 @@ class ItemBox (pygame.sprite.Sprite):
         self.rect.midtop = (x + TILE_SIZE//2, y +
                             (TILE_SIZE-self.image.get_height()))
 
+    def update(self):
+        if pygame.sprite.collide_rect(self, player):
+            if self.type == "health_box":
+                player.health += 25
+                if player.health > 100:
+                    player.health = 100
+            elif self.type == "ammo_box":
+                player.ammo += 10
+            elif self.type == "grenade_box":
+                player.grenade_ammo += 3
+
+            self.kill()
+
 
 bullet_group = pygame.sprite.Group()
 grenade_group = pygame.sprite.Group()
 explosion_group = pygame.sprite.Group()
 # enemy_group = pygame.sprite.Group()
 enemy_group = []
+item_box_group = pygame.sprite.Group()
 
 player = Player("player", x=200, y=200, scale=4)
 enemy = Player("enemy", x=800, y=550, scale=4)
 enemy2 = Player("player", x=400, y=550, scale=4)
 enemy_group.append(enemy)
 enemy_group.append(enemy2)
+
+
+item1 = ItemBox("ammo_box", 100, FLOOR-50)
+item2 = ItemBox("grenade_box", 400, FLOOR-50)
+item3 = ItemBox("health_box", 600, FLOOR-50)
+
+item_box_group.add(item1)
+item_box_group.add(item2)
+item_box_group.add(item3)

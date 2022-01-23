@@ -9,6 +9,16 @@ while gameRunning:  # inf game loop
     # background reset
     draw_bg()
 
+    draw_text(f"AMMO : ", font, WHITE, 10, 25)
+    for i in range(player.ammo):
+        screen.blit(resize_image(
+            "./src/images/objects/bullet.png", 2), (100+i*20, 25))
+    draw_text(f"GRENADES : ", font, GREEN, 10, 60)
+    for i in range(player.grenade_ammo):
+        screen.blit(resize_image(
+            "./src/images/objects/grenade.png", 2), (150+i*30, 55))
+    draw_text(f"HEALTH : ", font, RED, 10, 95)
+
     # bullet
     bullet_group.update()
     bullet_group.draw(screen)
@@ -20,6 +30,9 @@ while gameRunning:  # inf game loop
     # explosion
     explosion_group.update()
     explosion_group.draw(screen)
+
+    item_box_group.draw(screen)
+    item_box_group.update()
 
     # fps
     clock.tick(FPS)
