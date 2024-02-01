@@ -52,8 +52,17 @@ screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)  # fullscreen mode
 FLOOR = 700
 WHITE = (255, 255, 255)
 GREEN = (0, 128, 0)
+
+# for windows systems
+# item_boxes = {
+#     "ammo_box": resize_image("src\\images\\objects\\ammo_box_new.png", 0.3),
+#     "grenade_box": resize_image("src\\images\\objects\\grenade_box_new.png", 0.3),
+#     "health_box": resize_image("src\\images\\objects\\health_box.png", 2)
+# }
+
+# for unix_based systems
 item_boxes = {
-    "ammo_box": resize_image("src\\images\\objects\\ammo_box_new.png", 0.3),
-    "grenade_box": resize_image("src\\images\\objects\\grenade_box_new.png", 0.3),
-    "health_box": resize_image("src\\images\\objects\\health_box.png", 2)
+    "ammo_box": resize_image("src/images/objects/ammo_box_new.png", 0.3),
+    "grenade_box": resize_image("src/images/objects/grenade_box_new.png", 0.3),
+    "health_box": resize_image("src/images/objects/health_box.png", 2)
 }
