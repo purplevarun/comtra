@@ -265,9 +265,9 @@ item_box_group = pygame.sprite.Group()
 
 player = Player("player", x=200, y=200, scale=4)
 enemy = Player("enemy", x=800, y=550, scale=4)
-enemy2 = Player("player", x=400, y=550, scale=4)
+# enemy2 = Player("player", x=400, y=550, scale=4)
 enemy_group.append(enemy)
-enemy_group.append(enemy2)
+# enemy_group.append(enemy2)
 
 
 item1 = ItemBox("ammo_box", 100, FLOOR-50)
