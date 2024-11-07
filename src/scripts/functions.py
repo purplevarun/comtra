@@ -1,5 +1,5 @@
 import pygame
-from src.scripts.Global import *
+from scripts.Global import *
 
 
 def draw_bg():

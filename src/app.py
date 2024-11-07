@@ -1,7 +1,7 @@
 import pygame
-from src.scripts.Global import *
-from src.scripts.functions import *
-from src.scripts.main import *
+from scripts.Global import *
+from scripts.functions import *
+from scripts.main import *
 
 gameRunning = True
 while gameRunning:  # inf game loop

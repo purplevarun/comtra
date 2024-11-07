@@ -1,6 +1,6 @@
 import pygame
-from src.scripts.Global import *
-from src.scripts.functions import *
+from scripts.Global import *
+from scripts.functions import *
 
 
 class Player(pygame.sprite.Sprite):
@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.add_images('run', 2)  # 1
         self.add_images('jump', 2)  # 2
         self.add_images('shoot', 2)  # 3
-        self.add_images('death', 5)  # 4
+        self.add_images('death', 2)  # 4
         self.add_images('grenade', 2)  # 5
 
         self.frameIndex = 0
